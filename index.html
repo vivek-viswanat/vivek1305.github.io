@@ -96,8 +96,11 @@
 				
 				if (interval > THRESHOLD_INTERVAL) {
 					console.log("submitting data");
-					var device_id = $("#device_id").val();
-					submitGpsCoords(device_id, lat, lng, alt);
+					var device_id = $.trim($("#device_id").val());
+					if (device_id != '') {
+						submitGpsCoords(device_id, lat, lng, alt);
+						lastSubmitDate = now;
+					}
 				}
 			}
 			
