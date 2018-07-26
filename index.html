@@ -57,9 +57,11 @@
 
 		<script type="text/javascript">
     
+			var THRESHOLD_INTERVAL = 30;
+	
 			var lat = 0;
 			var lng = 0;
-			var lastSubmitDate = new Date();
+			var lastSubmitDate = 0;
 	
 			function trackPosition(position) {
 				console.log("trackPosition invoked");
