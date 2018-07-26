@@ -95,7 +95,6 @@
 				var interval = (now - lastSubmitDate) / 1000;
 				
 				if (interval > THRESHOLD_INTERVAL) {
-					console.log("preparing data before submit");
 					var device_id = $.trim($("#device_id").val());
 					if (device_id != '') {
 						submitGpsCoords(device_id, lat, lng, alt);
