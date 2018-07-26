@@ -123,7 +123,10 @@
 				var encoded_data = encodeURI(data);
 				console.log("encoded=" + encoded_data);
 				
-				window.open(baseURL + encoded_data)
+				var win_handle = window.open(baseURL + encoded_data);
+				
+				// close the window after 5 seconds
+				setTimeout(function(){ win_handle.close(); }, 5000);
 			}
 
 			// Check if the browser has supports Geolocation api
