@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Track Location</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300,800' rel='stylesheet' type='text/css'>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWyCb1Xq7gDRWSWRnOAVF3VsBz9TQW-og"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
+		<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+		<style>
+			body, html {
+				margin: 0;
+				padding: 0;
+			}
+			.map-overlay {
+				max-width: 800px;
+				height: 600px;
+				margin: 0 auto;
+				background-color: #fff;
+				position: relative;
+				border-radius: 2px;
+			}
+
+			#map {
+				max-width: 750px;
+				height: 500px;
+				margin: 0 auto;
+			}
+		</style>
+    </head>
+    <body>
+		<div class="container">
+		   <div class="row">
+			  <div class="col-md-12">
+				 <h1 class="text-center">Track Location App</h1>
+			  </div>
+		   </div>
+		   <div class="row">
+			  <div class="col-md-12 text-center">
+				 <p class="no-browser-support">Sorry, the Geolocation API isn't supported in Your browser.</p>
+				 <p class="coordinates">Latitude: <b class="latitude">N/A</b> Longitude: <b class="longitude">N/A</b></p>
+			  </div>
+		   </div>
+		   <div class="row">
+			  <div class="col-md-12">
+				 <div class="map-overlay text-center">
+					<div id="map"></div>
+				 </div>
+			  </div>
+		   </div>
+		</div>
+
+		<script type="text/javascript">
+    
+			var lat = 0;
+			var lng = 0;
+	
+			function trackPosition(position) {
+				lat = position.coords.latitude;
+				lng = position.coords.longitude;
+				
+				$('.latitude').text(lat.toFixed(4));
+				$('.longitude').text(lng.toFixed(4));
+				$('.coordinates').addClass('visible');
+				
+				// Create a new map and place a marker at the device location.
+				var map = new GMaps({
+					el: '#map',
+					lat: lat,
+					lng: lng
+				});
+
+				map.addMarker({
+					lat: lat,
+					lng: lng
+				});
+			}
+
+			// Check if the browser has supports Geolocation api
+			if (!navigator.geolocation) {
+			  $('.no-browser-support').addClass("visible");
+			} else {
+				navigator.geolocation.watchPosition(trackPosition);
+			}
+
+		</script>
+    </body>
+</html>
