@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300,800' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,600,300,800' rel='stylesheet' type='text/css'>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWyCb1Xq7gDRWSWRnOAVF3VsBz9TQW-og"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
@@ -61,6 +61,7 @@
 	
 			var lat = 0;
 			var lng = 0;
+			var alt = 500;
 			var lastSubmitDate = 0;
 	
 			function trackPosition(position) {
@@ -68,6 +69,11 @@
 			
 				lat = position.coords.latitude;
 				lng = position.coords.longitude;
+				
+				if (position.coords.altitude === null)
+					alt = 500;
+				else
+					alt = position.coords.altitude;
 				
 				$('.latitude').text(lat.toFixed(4));
 				$('.longitude').text(lng.toFixed(4));
